@@ -24,6 +24,10 @@ module.exports = {
     module: {
         //html file hadn't a loader, so edit html file can not hot refresh
         loaders: [
+            {
+                    test   : /\.css$/i, 
+                    loaders : ["style", "css"]
+            },
             // issue css?sourceMap cause font file to encode fail
             // but not ?sourceMap cannot use sourceMap in css file
             {

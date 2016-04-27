@@ -1,0 +1,22 @@
+.page, 
+.page1, 
+.page2 {
+	background: #ddd;
+}
+
+.page1 h1, 
+.page2 h1{
+	transition: all 0.3s ;
+}
+
+
+.page1 h1{
+	background: #77C3B2;
+	height: 300px;
+}
+
+.page2 h1{
+	background: tomato;
+	color: #fff;
+	height: 500px;
+}
