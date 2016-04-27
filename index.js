@@ -55,6 +55,33 @@ function printDir( data, level ){
 	})
 }
 
-getDirStructure(  'src' , function(err, data){
-	 printDir( data );
-} )
+var marked = require('marked')
+
+var markdown = function(text){
+
+	return 'import React, {Component} from "react" \n'+
+	'export default class Output extends Component{\n' +
+
+		'render(){\n'+
+			
+			'return (<div>\n'+marked(text)+'</div>\n)\n'+
+
+		'}\n'+
+
+	'}\n';
+}
+
+
+fs.readFile('README', 'UTF-8',function (err, text) {
+  	if (err) throw err;
+	var markedStr = markdown(text)
+
+  	fs.writeFile('src/Output.jsx', markedStr, function (err) {
+  		if (err) throw err;
+  		console.log('文件写入成功');
+	});
+
+});
+// getDirStructure(  'src' , function(err, data){
+	 // printDir( data );
+// } )
