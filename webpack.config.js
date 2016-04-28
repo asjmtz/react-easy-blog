@@ -1,5 +1,6 @@
 var webpack = require('webpack');
 var path = require('path')
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 var srcPath = path.join(__dirname, 'src')
 var entry = path.join(__dirname, 'src', 'index')
 var outputPath = path.join(__dirname, 'dist')
@@ -7,8 +8,14 @@ var outputPath = path.join(__dirname, 'dist')
 var port = process.env.PORT || 3000
 var plugins = [];
 plugins = plugins.concat([
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new HtmlWebpackPlugin({
+        template: path.join(__dirname, 'src', 'index.html'), // Load a custom template
+        inject: 'body' // Inject all scripts into the body
+    })
   ]);
+
+
 module.exports = {
     entry: [
         'webpack-dev-server/client?http://0.0.0.0:'+port, // WebpackDevServer host and port
@@ -25,9 +32,16 @@ module.exports = {
         //html file hadn't a loader, so edit html file can not hot refresh
         loaders: [
             {
+                test: /\.md$/,
+                loader: 'babel-loader!reactdown/webpack',
+            },
+
+            // json loader for react-markdown
+            {
                     test   : /\.css$/i, 
                     loaders : ["style", "css"]
             },
+            
             // issue css?sourceMap cause font file to encode fail
             // but not ?sourceMap cannot use sourceMap in css file
             {
@@ -39,11 +53,11 @@ module.exports = {
                 test: /\.(jsx|js)?$/,
                 exclude: /(node_modules|bower_components)/,
                 loader: 'babel',
-                query: {
-                    // https://github.com/babel/babel-loader#options
-                    cacheDirectory: true,
-                    presets: ['es2015', 'react']
-                }
+                // query: {
+                //     // https://github.com/babel/babel-loader#options
+                //     cacheDirectory: true,
+                //     presets: ['es2015', 'react', 'stage-1']
+                // }
             },
             { test: /\.gif$/  , loader: "url?limit=10000&mimetype=image/gif" },
             { test: /\.jpg$/  , loader: "url?limit=10000&mimetype=image/jpg" },

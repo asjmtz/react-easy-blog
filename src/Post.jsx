@@ -1,11 +1,8 @@
 import React, { Component } from 'react'
 import marked from 'marked'
-import Content from './Output'
 
-const mkStr = "## Hello Post\n"+
-	"- 342"+
-	"- 234234"+
-	"- 3423423";
+import Document from './output.md'
+
 
 
 export default class Post extends Component{
@@ -18,7 +15,7 @@ export default class Post extends Component{
 				<h1>Post</h1>
 				<h3>Id: {id}</h3>
 				<div>Content:</div>
-				<Content></Content>
+				<Document></Document>
 			</div>
 		)
 	}
