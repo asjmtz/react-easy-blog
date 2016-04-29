@@ -28,8 +28,8 @@ module.exports = {
         filename: "bundle.js"
     },
     // devtool: 'source-map',
-    devtool: 'eval',
-    devServer: { hot: true },
+    // devtool: 'eval',
+    // devServer: { hot: true },
     module: {
         //html file hadn't a loader, so edit html file can not hot refresh
         loaders: [
