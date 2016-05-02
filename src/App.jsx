@@ -2,16 +2,17 @@ import React, { Component } from 'react'
 import { Link } from 'react-router'
 import Post from './Post'
 import './main.css'
+import postData from './posts.json'
 
 const navList = [
 	{
-		path: '/post/123',
-		name: '/post/123',
+		path: '/post/output',
+		name: '/post/output',
 		pageClassName: 'page1',
 	},
 	{
-		path: '/post/345',
-		name: '/post/345',
+		path: '/post/README',
+		name: '/post/README',
 		pageClassName: 'page2',
 	},
 ]
@@ -39,6 +40,7 @@ class App extends Component {
 	render() {
 		let { pageClassName } = this.state
 		let listDOM = this.renderNavList(navList)
+		console.log('postData',postData)
 		return (
 			<div>
 				<h1>App</h1>

@@ -10,13 +10,16 @@ const routes = {
   	component: App,
   	// indexRoute: { component: Dashboard },
   	childRoutes: [
-    	{ path: 'post/:id', component: Post },
+    	{ 
+    		path: 'post/:post', 
+    		component: Post, 
+    		
+    	},
     	// {
 	    //   	path: 'inbox',
 	    //   	component: Inbox,
 	    //   	childRoutes: [{
 	    //     	path: 'messages/:id',
-	    //     	onEnter: ({ params }, replace) => replace(`/messages/${params.id}`)
 	    //   	}]
     	// },
 	    // {

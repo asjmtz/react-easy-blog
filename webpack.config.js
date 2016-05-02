@@ -1,19 +1,37 @@
 var webpack = require('webpack');
 var path = require('path')
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var DirFileDataPlugin = require('./lib/DirFileDataPlugin.js');
+var WatchIgnorePlugin = require('watch-ignore-webpack-plugin')
+ 
+
+
 var srcPath = path.join(__dirname, 'src')
 var entry = path.join(__dirname, 'src', 'index')
 var outputPath = path.join(__dirname, 'dist')
 
 var port = process.env.PORT || 3000
 var plugins = [];
+// createDataJSON('posts');
 plugins = plugins.concat([
+    // new webpack.optimize.CommonsChunkPlugin({
+    //     name: "commons",
+    //     filename: "commons.js",
+    // }),
+    new DirFileDataPlugin({ 
+        entry: path.join(__dirname, 'posts'),
+        output: path.join(__dirname, 'src', 'posts.json'),
+    }),
+    new WatchIgnorePlugin([
+        path.resolve(__dirname, 'src', 'posts.json'),
+    ]),
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
         template: path.join(__dirname, 'src', 'index.html'), // Load a custom template
-        inject: 'body' // Inject all scripts into the body
+        inject: false, // Inject all scripts into the body
+        chunks: ['main', 'document'],
     })
-  ]);
+]);
 
 
 module.exports = {
@@ -24,6 +42,7 @@ module.exports = {
     ],
     output: {
         path: outputPath,
+        chunkFilename: '[name].chunk.js',
         // publicPath: __dirname + '/dist/', //a path used in index.html or other file to reference compiled files
         filename: "bundle.js"
     },
@@ -37,8 +56,10 @@ module.exports = {
                 test: /\.md$/,
                 loader: 'babel-loader!reactdown/webpack',
             },
-
-            // json loader for react-markdown
+            {
+                    test   : /\.json$/i, 
+                    loader : "json",
+            },
             {
                     test   : /\.css$/i, 
                     loaders : ["style", "css"]

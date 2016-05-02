@@ -1,9 +1,9 @@
 # Why 
 
-挖坑 :sunny:
+挖坑 
 
 ## TODO
 
 
-- 生成的文件要放到 gh-pages 分支
-- 读取 markdown 文件生成 html，放到页面渲染
+- 怎样读取目录下所有的 *.md 文件，将文件的信息数据 =》 写到一个 js 文件里， App.jsx 引入他
+- 
