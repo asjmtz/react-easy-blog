@@ -2,7 +2,7 @@ var webpack = require('webpack');
 var path = require('path')
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var DirFileDataPlugin = require('./lib/DirFileDataPlugin.js');
-var WatchIgnorePlugin = require('watch-ignore-webpack-plugin')
+// var WatchIgnorePlugin = require('watch-ignore-webpack-plugin')
  
 
 
@@ -22,9 +22,9 @@ plugins = plugins.concat([
         entry: path.join(__dirname, 'posts'),
         output: path.join(__dirname, 'src', 'posts.json'),
     }),
-    new WatchIgnorePlugin([
-        path.resolve(__dirname, 'src', 'posts.json'),
-    ]),
+    // new WatchIgnorePlugin([
+    //     path.resolve(__dirname, 'src', 'posts.json'),
+    // ]),
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
         template: path.join(__dirname, 'src', 'index.html'), // Load a custom template
